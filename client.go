@@ -25,7 +25,7 @@ func NewClient(accessKeyID, accessKeySecret string) *Client {
 }
 
 // MakeRequestParams makes request parameters according to https://help.aliyun.com/document_detail/56189.html
-func (c *Client) MakeRequestParams(httpMethod string, bizParams map[string]string) map[string]string {
+func (c *Client) makeRequestParams(httpMethod string, bizParams map[string]string) map[string]string {
 	params := map[string]string{}
 	for k, v := range bizParams {
 		params[k] = v
