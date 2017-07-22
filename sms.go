@@ -11,10 +11,10 @@ import (
 )
 
 type SMSSendRequest struct {
-	PhoneNumbers   []string
-	TemplateCode   string
-	TemplateParams map[string]string
-	SignName       string
+	PhoneNumbers   []string          //Required
+	TemplateCode   string            //Required
+	TemplateParams map[string]string //Optional
+	SignName       string            //Required
 }
 
 type SMSSendResponse struct {
