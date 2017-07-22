@@ -55,7 +55,7 @@ func (c *Client) makeRequestParams(httpMethod string, bizParams map[string]strin
 
 	queryStr := buf.String()
 	queryStr = queryStr[:len(queryStr)-1]
-	gox.LogInfo(queryStr)
+
 	buf.Reset()
 	buf.WriteString(httpMethod)
 	buf.WriteString("&")
