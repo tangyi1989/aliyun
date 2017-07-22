@@ -6,8 +6,8 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"github.com/natande/gox"
-	"go4.org/sort"
 	"net/url"
+	"sort"
 	"strings"
 	"time"
 )
