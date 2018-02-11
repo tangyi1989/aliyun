@@ -5,7 +5,7 @@ import (
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/base64"
-	"github.com/natande/gox"
+	"github.com/gopub/types"
 	"net/url"
 	"sort"
 	"strings"
@@ -34,7 +34,7 @@ func (c *Client) makeRequestParams(httpMethod string, bizParams map[string]strin
 	params["AccessKeyId"] = c.accessKeyID
 	params["SignatureMethod"] = "HMAC-SHA1"
 	params["SignatureVersion"] = "1.0"
-	params["SignatureNonce"] = gox.NewUUID()
+	params["SignatureNonce"] = types.NewID().ShortString()
 	params["Format"] = "JSON"
 	params["Timestamp"] = time.Now().UTC().Format("2006-01-02T15:04:05Z")
 

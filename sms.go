@@ -4,7 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/natande/gox"
+	"github.com/gopub/log"
+	"github.com/gopub/utils"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -31,7 +32,7 @@ func (c *Client) SMSSend(req *SMSSendRequest) (*SMSSendResponse, error) {
 		"RegionId":      "cn-hangzhou",
 		"PhoneNumbers":  strings.Join(req.PhoneNumbers, ","),
 		"TemplateCode":  req.TemplateCode,
-		"TemplateParam": gox.JSONMarshalStr(req.TemplateParams),
+		"TemplateParam": utils.JSONMarshalStr(req.TemplateParams),
 		"SignName":      req.SignName,
 	}
 
@@ -43,22 +44,22 @@ func (c *Client) SMSSend(req *SMSSendRequest) (*SMSSendResponse, error) {
 		buf.WriteString(v)
 		buf.WriteString("&")
 	}
-	resp, err := http.Post("http://dysmsapi.aliyuncs.com", gox.MIMEPOSTForm, buf)
+	resp, err := http.Post("http://dysmsapi.aliyuncs.com", utils.MIMEPOSTForm, buf)
 	if err != nil {
-		gox.LogError(err)
+		log.Error(err)
 		return nil, err
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		gox.LogError(err)
+		log.Error(err)
 		return nil, err
 	}
 	defer resp.Body.Close()
 	var result *SMSSendResponse
 	err = json.Unmarshal(body, &result)
 	if err != nil {
-		gox.LogError(err)
+		log.Error(err)
 	}
 	return result, err
 }
@@ -100,22 +101,22 @@ func (c *Client) SMSQuerySendDetails(req *SMSQueryRequest) (*SMSQueryResponse, e
 		buf.WriteString(v)
 		buf.WriteString("&")
 	}
-	resp, err := http.Post("http://dysmsapi.aliyuncs.com", gox.MIMEPOSTForm, buf)
+	resp, err := http.Post("http://dysmsapi.aliyuncs.com", utils.MIMEPOSTForm, buf)
 	if err != nil {
-		gox.LogError(err)
+		log.Error(err)
 		return nil, err
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		gox.LogError(err)
+		log.Error(err)
 		return nil, err
 	}
 	defer resp.Body.Close()
 	var result *SMSQueryResponse
 	err = json.Unmarshal(body, &result)
 	if err != nil {
-		gox.LogError(err)
+		log.Error(err)
 	}
 	return result, err
 }
